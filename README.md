@@ -1,0 +1,1 @@
+# amq-keycloak-openshift
