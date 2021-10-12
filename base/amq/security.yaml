@@ -1,0 +1,64 @@
+apiVersion: broker.amq.io/v1alpha1
+kind: ActiveMQArtemisSecurity
+metadata:
+  name: keycloak
+spec:
+  loginModules:
+    keycloakLoginModules:
+    - configuration:
+        authServerUrl: https://keycloak-hostname/auth/
+        credentials:
+        - key: secret
+          value: copy-keycloak-client-secret-here
+        principalAttribute: preferred_username
+        realm: myrealm
+        resource: artemis-broker
+        sslRequired: external
+        useResourceRoleMappings: true
+      moduleType: directAccess
+      name: keycloak-broker
+  securityDomains:
+    brokerDomain:
+      name: 'activemq'
+      loginModules:
+      - name: 'keycloak-broker'
+        reload: true
+        flag: 'required'
+        debug: true
+  securitySettings:
+    broker:
+      - match: '#'
+        permissions:
+        - operationType: 'createAddress'
+          roles:
+          - admin
+          - producer
+          - consumer
+        - operationType: 'createDurableQueue'
+          roles:
+          - admin
+          - producer
+          - consumer
+        - operationType: 'deleteDurableQueue'
+          roles:
+          - admin
+        - operationType: 'createNonDurableQueue'
+          roles:
+          - admin
+          - producer
+          - consumer
+        - operationType: 'deleteNonDurableQueue'
+          roles:
+          - admin
+        - operationType: 'send'
+          roles:
+          - admin
+          - producer
+        - operationType: 'consume'
+          roles:
+          - admin
+          - consumer
+    management:
+      hawtioRoles:
+      - admin
+

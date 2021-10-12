@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-namespace
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: my-namespace
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: overlay/my-namespace
+    repoURL: https://bszeti@github.com/amq-keycloak-openshift
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

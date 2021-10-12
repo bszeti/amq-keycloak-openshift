@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- secret-ssl-acceptor.yaml
+- secret-ssl-console.yaml
+- operator.yaml
+- broker.yaml
+- security.yaml

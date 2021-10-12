@@ -1,0 +1,70 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: my-namespace
+
+resources:
+- namespace.yaml
+- ../../base
+- user-credentials.yaml
+
+patches:
+# Keycloak client secret
+- target:
+    kind: KeycloakClient
+    name: artemis-broker
+  patch: |-
+    - op: replace
+      path: /spec/client/secret
+      value: 0c2edacd-146a-442a-8852-b29d945a96e8
+# Keycloak url and client secret
+- target:
+    kind: ActiveMQArtemisSecurity
+    name: keycloak
+  patch: |-
+    - op: replace
+      path: /spec/loginModules/keycloakLoginModules/0/configuration/authServerUrl
+      # TODO: We may need to use the external route here because of cert issues
+      value: https://keycloak/auth/
+    - op: replace
+      path: /spec/loginModules/keycloakLoginModules/0/configuration/credentials/0/value
+      value: 0c2edacd-146a-442a-8852-b29d945a96e8
+# Keycloak user passwords - myadmin's is provisioned in secret as an example
+- target:
+    kind: KeycloakUser
+    name: myproducer
+  patch: |-
+    kind: KeycloakUser
+    metadata:
+      name: myproducer
+    spec:
+      user:
+        credentials:
+          - type: password
+            value: secret
+- target:
+    kind: KeycloakUser
+    name: myconsumer
+  patch: |-
+    kind: KeycloakUser
+    metadata:
+      name: myconsumer
+    spec:
+      user:
+        credentials:
+          - type: password
+            value: secret
+
+# This is left here only as example for 'replacements'. Simply adding the namespace to OperatorGroup is easier
+replacements:
+- source: 
+    kind: OperatorGroup
+    name: self
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: OperatorGroup
+      name: self
+    fieldPaths:
+    - spec.targetNamespaces.0
+

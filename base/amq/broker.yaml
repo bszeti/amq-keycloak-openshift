@@ -1,0 +1,35 @@
+apiVersion: broker.amq.io/v2alpha5
+kind: ActiveMQArtemis
+metadata:
+  name: my-broker
+spec:
+  upgrades:
+    enabled: true
+    minor: true
+  version: 7.9.0
+  acceptors:
+    - expose: true
+      name: ssl
+      port: 61617
+      protocols: amqp,core
+      sslEnabled: true
+      sslSecret: amq-broker-ssl-acceptor
+  console:
+    expose: true
+    sslEnabled: true
+    sslSecret: amq-broker-ssl-console
+  deploymentPlan:
+    image: placeholder
+    persistenceEnabled: true
+    requireLogin: true
+    size: 1
+    storage:
+      size: 2Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: "2"
+        memory: 1Gi
+ 
