@@ -26,7 +26,7 @@ patches:
     - op: replace
       path: /spec/loginModules/keycloakLoginModules/0/configuration/authServerUrl
       # TODO: We may need to use the external route here because of cert issues
-      value: https://keycloak/auth/
+      value: https://keycloak:8443/auth/
     - op: replace
       path: /spec/loginModules/keycloakLoginModules/0/configuration/credentials/0/value
       value: 0c2edacd-146a-442a-8852-b29d945a96e8
