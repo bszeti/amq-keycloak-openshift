@@ -4,5 +4,5 @@ metadata:
   name: my-namespace
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+  # annotations:
+  #   argocd.argoproj.io/sync-wave: "-1"
