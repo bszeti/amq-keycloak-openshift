@@ -22,7 +22,7 @@ spec:
     image: placeholder
     persistenceEnabled: true
     requireLogin: true
-    size: 1
+    size: 2
     storage:
       size: 2Gi
     resources:

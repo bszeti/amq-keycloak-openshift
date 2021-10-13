@@ -5,5 +5,6 @@ resources:
 - secret-ssl-acceptor.yaml
 - secret-ssl-console.yaml
 - operator.yaml
+- console-route.yaml
 - broker.yaml
 - security.yaml

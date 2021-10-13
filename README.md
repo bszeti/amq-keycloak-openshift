@@ -81,3 +81,51 @@ and added to the secrets like this:
 ```
 oc create secret generic amq-broker-ssl-acceptor --from-file=broker.ks=broker.ks --from-file=client.ts=broker.ts --from-literal=trustStorePassword=changeit --from-literal=keyStorePassword=secret
 ```
+
+## Test
+
+Get exposed acceptor's hostname:
+
+ `oc get route -ojsonpath='{.spec.host}' -n my-namespace my-broker-ssl-0-svc-rte`
+
+Send a message:
+
+```
+bin/artemis producer \
+  --url "tcp://$(oc get route -ojsonpath='{.spec.host}' -n my-namespace my-broker-ssl-0-svc-rte):443?verifyHost=false&sslEnabled=true&trustStorePath=broker.ts&trustStorePassword=changeit" \
+  --user myproducer --password secret \
+  --text-size 100 --message-count 1 \
+  --destination queue://test
+```
+
+or using AMQP protocol (instead of CORE):
+
+```
+bin/artemis producer \
+  --url "amqps://$(oc get route -ojsonpath='{.spec.host}' -n my-namespace my-broker-ssl-0-svc-rte):443?transport.verifyHost=false&transport.trustStoreLocation=broker.ts&transport.trustStorePassword=changeit" \
+  --user myproducer --password secret \
+  --text-size 100 --message-count 1 \
+  --destination queue://amqp-test \
+  --protocol amqp
+```
+
+Receive messages:
+
+```
+bin/artemis consumer \
+  --url "tcp://$(oc get route -ojsonpath='{.spec.host}' -n my-namespace my-broker-ssl-0-svc-rte):443?verifyHost=false&sslEnabled=true&trustStorePath=broker.ts&trustStorePassword=changeit" \
+  --user myconsumer --password secret \
+  --message-count 1 \
+  --destination queue://test
+```
+
+or through AMQP protocol:
+
+```
+bin/artemis consumer \
+  --url "amqps://$(oc get route -ojsonpath='{.spec.host}' -n my-namespace my-broker-ssl-0-svc-rte):443?transport.verifyHost=false&transport.trustStoreLocation=broker.ts&transport.trustStorePassword=changeit" \
+  --user myconsumer --password secret \
+  --message-count 1 \
+  --destination queue://amqp-test \
+  --protocol amqp
+```

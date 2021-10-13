@@ -1,0 +1,63 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: my-broker-wconsj-0-svc-rte
+spec:
+  to:
+    kind: Service
+    name: my-broker-wconsj-0-svc
+    weight: 100
+  port:
+    targetPort: wconsj-0
+  tls:
+    termination: reencrypt
+    destinationCACertificate: |-
+      -----BEGIN CERTIFICATE-----
+      MIICxzCCAa+gAwIBAgIEH95pUjANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDEwlt
+      eS1icm9rZXIwHhcNMjExMDEyMTMyMzQyWhcNMjIwMTEwMTMyMzQyWjAUMRIwEAYD
+      VQQDEwlteS1icm9rZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCt
+      G+E9ESAwZRpm8QrPdAPE7tPjCJdSAw5Gbfcr1BLoS8wKj2UJmP4RiTO0TzR8GbVV
+      vmtwhLPjqhSqVFA+1Lv7/d/IX3N0DMowrwbbtiCVZ1M96XMPNYtP72Y2oFg5ATDx
+      YbSQC/6ccvTkoMZBGRQO9CO3IznYStadbA5vwP28kvChpYJ0IXzW24kTf5sb7nRB
+      9fhGGB6vI3DrOQpKeBXWF8DCJmrsaytWleT109iLDCKMsz2Cxv0HOQgrWjcGaHL5
+      7OwMxXyOYS1gHUqCfoopk7qwve7n+eN4fEXLqpTe9wAzlT4YnA01Qduj3DB7oNUQ
+      XY/rz5NkkDQBODe1rUq7AgMBAAGjITAfMB0GA1UdDgQWBBR6TAEhxgKAAP+6gxdI
+      mAhIOn8kHjANBgkqhkiG9w0BAQsFAAOCAQEAFx3K5bXUSpo29fPKavnQJgKZI5wb
+      BFRNF3KmMegP94bum/xVVlYMfWAPl8hWQ3g0pQ6uzq3vESOOiRnILpWqp4W4lfND
+      rsAgamjAKvPbiwspkLO/TmC+fl+o992WEZc7jhjsqalM7gt3zSbe/e01M+g8XlqK
+      fodXa6QKSgXu/emCvQPObFWvyNHvpL56UvuVNioc2G2JcCIQYQmpRysBGrNuCyNK
+      PMVktyCb5LWgP00YHy3hQXJqeA+2Qqm16rCqACKFeYFj/SBuODe2KQHytOrowUNL
+      EnaWMCfe470vTLg2FEkHVsJV/+tnfnzyDARqzw53Q51t/wIZUxF8KWXuHg==
+      -----END CERTIFICATE-----
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: my-broker-wconsj-1-svc-rte
+spec:
+  to:
+    kind: Service
+    name: my-broker-wconsj-1-svc
+    weight: 100
+  port:
+    targetPort: wconsj-1
+  tls:
+    termination: reencrypt
+    destinationCACertificate: |-
+      -----BEGIN CERTIFICATE-----
+      MIICxzCCAa+gAwIBAgIEH95pUjANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDEwlt
+      eS1icm9rZXIwHhcNMjExMDEyMTMyMzQyWhcNMjIwMTEwMTMyMzQyWjAUMRIwEAYD
+      VQQDEwlteS1icm9rZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCt
+      G+E9ESAwZRpm8QrPdAPE7tPjCJdSAw5Gbfcr1BLoS8wKj2UJmP4RiTO0TzR8GbVV
+      vmtwhLPjqhSqVFA+1Lv7/d/IX3N0DMowrwbbtiCVZ1M96XMPNYtP72Y2oFg5ATDx
+      YbSQC/6ccvTkoMZBGRQO9CO3IznYStadbA5vwP28kvChpYJ0IXzW24kTf5sb7nRB
+      9fhGGB6vI3DrOQpKeBXWF8DCJmrsaytWleT109iLDCKMsz2Cxv0HOQgrWjcGaHL5
+      7OwMxXyOYS1gHUqCfoopk7qwve7n+eN4fEXLqpTe9wAzlT4YnA01Qduj3DB7oNUQ
+      XY/rz5NkkDQBODe1rUq7AgMBAAGjITAfMB0GA1UdDgQWBBR6TAEhxgKAAP+6gxdI
+      mAhIOn8kHjANBgkqhkiG9w0BAQsFAAOCAQEAFx3K5bXUSpo29fPKavnQJgKZI5wb
+      BFRNF3KmMegP94bum/xVVlYMfWAPl8hWQ3g0pQ6uzq3vESOOiRnILpWqp4W4lfND
+      rsAgamjAKvPbiwspkLO/TmC+fl+o992WEZc7jhjsqalM7gt3zSbe/e01M+g8XlqK
+      fodXa6QKSgXu/emCvQPObFWvyNHvpL56UvuVNioc2G2JcCIQYQmpRysBGrNuCyNK
+      PMVktyCb5LWgP00YHy3hQXJqeA+2Qqm16rCqACKFeYFj/SBuODe2KQHytOrowUNL
+      EnaWMCfe470vTLg2FEkHVsJV/+tnfnzyDARqzw53Q51t/wIZUxF8KWXuHg==
+      -----END CERTIFICATE-----
