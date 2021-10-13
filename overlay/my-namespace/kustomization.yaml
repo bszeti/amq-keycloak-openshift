@@ -9,6 +9,7 @@ resources:
 - user-credentials.yaml
 
 patches:
+- path: operator-group.yaml
 # Keycloak client secret
 - target:
     kind: KeycloakClient
@@ -56,15 +57,16 @@ patches:
             value: secret
 
 # This is left here only as example for 'replacements'. Simply adding the namespace to OperatorGroup is easier
-replacements:
-- source: 
-    kind: OperatorGroup
-    name: self
-    fieldPath: metadata.namespace
-  targets:
-  - select:
-      kind: OperatorGroup
-      name: self
-    fieldPaths:
-    - spec.targetNamespaces.0
+# Requires v4+ kustomize
+# replacements:
+# - source: 
+#     kind: OperatorGroup
+#     name: self
+#     fieldPath: metadata.namespace
+#   targets:
+#   - select:
+#       kind: OperatorGroup
+#       name: self
+#     fieldPaths:
+#     - spec.targetNamespaces.0
 

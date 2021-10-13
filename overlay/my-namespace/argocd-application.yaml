@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: overlay/my-namespace
-    repoURL: https://bszeti@github.com/amq-keycloak-openshift
+    repoURL: https://github.com/bszeti/amq-keycloak-openshift
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
