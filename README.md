@@ -60,6 +60,10 @@ spec:
       - CreateNamespace=true
 ```
 
+## Ordering
+
+If we were installing our resources manually, the operators should be istalled manually first through OperatotHub and we shoudl wait until the operator specific CRDs are created on the cluster. With ArgoCD we added `argocd.argoproj.io/sync-wave: "-1"` annotatrion on these resources, so they are installed first. Due to the asynchronous nature of Kubernetes, this may not be enough during the first _sync_ on a cluster where these CRDs don't exist yet. In this case we should run a partial sync first selecting only the _Namespace_, _OperatorGroup_ and _Subscription_ resources.
+
 ## Certificates
 
 Certificates used in the AMQ secrets were generated with keytool:
