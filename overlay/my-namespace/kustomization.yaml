@@ -31,7 +31,19 @@ patches:
     - op: replace
       path: /spec/loginModules/keycloakLoginModules/0/configuration/credentials/0/value
       value: 0c2edacd-146a-442a-8852-b29d945a96e8
-# Keycloak user passwords - myadmin's is provisioned in secret as an example
+# Keycloak user passwords
+- target:
+    kind: KeycloakUser
+    name: myadmin
+  patch: |-
+    kind: KeycloakUser
+    metadata:
+      name: myadmin
+    spec:
+      user:
+        credentials:
+          - type: password
+            value: secret
 - target:
     kind: KeycloakUser
     name: myproducer
