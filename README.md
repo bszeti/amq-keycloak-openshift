@@ -62,6 +62,12 @@ spec:
 
 Automatic sync is not enabled, but it can be added of course.
 
+---
+**NOTE**
+
+The keycloak url in `overlay/my-namespace/kustomization.yaml` must be updated before deployment to mach your cluster's domain name, so AMQ can connect to Keycloak through the route created by the operator.
+---
+
 ## Ordering
 
 If we were installing our resources manually, the operators should be istalled first through OperatotHub and we should wait until the operator specific CRDs are created on the cluster. With ArgoCD we added `argocd.argoproj.io/sync-wave: "-1"` annotation on these resources, so they are installed first. Due to the asynchronous nature of Kubernetes, this may not be enough during the first _sync_ on a cluster where these CRDs don't exist yet. In this case we should run a partial sync first selecting only the _Namespace_, _OperatorGroup_ and _Subscription_ resources.
@@ -128,4 +134,12 @@ bin/artemis consumer \
   --message-count 1 \
   --destination queue://amqp-test \
   --protocol amqp
+```
+
+## Delete namespace
+
+Before deleteing a namespace the operator related CRs should be removed. The easiest is to delete like this:
+
+```
+oc kustomize overlay/my-namespace | oc delete -f -
 ```
