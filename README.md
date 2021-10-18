@@ -66,6 +66,7 @@ Automatic sync is not enabled, but it can be added of course.
 **NOTE**
 
 The keycloak url in `overlay/my-namespace/kustomization.yaml` must be updated before deployment to mach your cluster's domain name, so AMQ can connect to Keycloak through the route created by the operator.
+
 ---
 
 ## Ordering
