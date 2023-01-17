@@ -144,3 +144,7 @@ Before deleteing a namespace the operator related CRs should be removed. The eas
 ```
 oc kustomize overlay/my-namespace | oc delete -f -
 ```
+
+## Additional links
+
+* Console login with standard OAuth flow: https://access.redhat.com/solutions/6973707 
