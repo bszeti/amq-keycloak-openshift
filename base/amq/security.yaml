@@ -15,6 +15,7 @@ spec:
         resource: artemis-broker
         sslRequired: external
         useResourceRoleMappings: true
+        enableBasicAuth: true
       moduleType: directAccess
       name: keycloak-broker
   securityDomains:

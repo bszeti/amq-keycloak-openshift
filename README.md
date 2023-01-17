@@ -137,12 +137,20 @@ bin/artemis consumer \
   --protocol amqp
 ```
 
+## Without ArgoCD
+
+It's also possible to install simply with kustomize:
+
+```
+oc apply -k ./overlay/my-namespace/
+```
+
 ## Delete namespace
 
 Before deleteing a namespace the operator related CRs should be removed. The easiest is to delete like this:
 
 ```
-oc kustomize overlay/my-namespace | oc delete -f -
+oc delete -k ./overlay/my-namespace/
 ```
 
 ## Additional links

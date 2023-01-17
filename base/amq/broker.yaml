@@ -6,7 +6,7 @@ spec:
   upgrades:
     enabled: true
     minor: true
-  version: 7.9.0
+  version: 7.10.2
   acceptors:
     - expose: true
       name: ssl
